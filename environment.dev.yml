@@ -1,0 +1,15 @@
+name: ploomber-datajam
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.8
+  - pygraphviz
+  - pip
+  - pip:
+    - ploomber
+    - pandas
+    - scikit-learn
+    - sklearn-evaluation
+    - jupyterlab

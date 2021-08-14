@@ -1,0 +1,23 @@
+meta:
+  jupyter_hot_reload: True
+
+tasks:
+  - source: scripts/get.py
+    product:
+      nb: output/get.ipynb
+      data: output/get.csv
+
+  - source: scripts/feature-sepal.py
+    product:
+      nb: output/feature-sepal.ipynb
+      data: output/feature-sepal.csv
+
+  - source: scripts/feature-petal.py
+    product:
+      nb: output/feature-petal.ipynb
+      data: output/feature-petal.csv
+
+  - source: scripts/fit.py
+    product:
+      nb: output/fit.ipynb
+      model: output/model.pickle
