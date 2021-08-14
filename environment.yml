@@ -1,4 +1,4 @@
-name: ploomber-datajam
+name: ploomber-workshop
 channels:
   - conda-forge
   - defaults

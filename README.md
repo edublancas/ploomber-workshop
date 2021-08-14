@@ -6,7 +6,7 @@ This workshop demonstrates how to develop reproducible pipelines using [Ploomber
 
 To start, [click here](https://mybinder.org/v2/gh/edublancas/vancouver-datajam/main?urlpath=lab/tree/index.ipynb) or on the button below:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/edublancas/ploomber-datajam/main?urlpath=lab/tree/index.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/edublancas/vancouver-datajam/main?urlpath=lab/tree/index.ipynb)
 
 **Note:** It may take a few seconds for the notebook to load.
 
@@ -44,7 +44,7 @@ pip install invoke
 
 invoke setup
 
-conda activate ploomber-datajam
+conda activate ploomber-workshop
 
 jupyter lab
 ```
