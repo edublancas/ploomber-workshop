@@ -40,12 +40,18 @@ Pre-requisites:
 2. `git`
 
 ```sh
-pip install invoke
+# clone the repository
+git clone https://github.com/edublancas/vancouver-datajam
+cd vancouver-datajam
 
+# install dependencies (requires conda)
+pip install invoke
 invoke setup
 
+# activate environment
 conda activate ploomber-workshop
 
+# start jupyter
 jupyter lab
 ```
 
