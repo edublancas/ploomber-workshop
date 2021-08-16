@@ -37,7 +37,7 @@ ls example
 
 We can see the following:
 
-* `output/` - directory to save our output
+* `output/` - directory to save our output (won't exist until after the first run)
 * `pipeline.yaml` - pipeline declaration
 * `scripts/` - our source code
 
@@ -108,7 +108,7 @@ tasks:
 
 The pipeline above has four tasks: one that obtains raw data (the iris dataset), two that process such data, and a final task that trains a model.
 
-#### Step 1: Copy the snippet contents above into `playground/pipeline.yaml`.
+#### Step 1: Copy the snippet contents above into `playground/pipeline.yaml` (Create the file first, save before running the next cell).
 
 Our source code is still missing; let's ask Ploomber to generate some base files for us:
 
