@@ -30,14 +30,13 @@ Familiarity with JupyterLab, and a basic knowledge of pandas.
 8. Coding the analysis
 9. Incremental builds
 
-10. Exploratory data analysis
-11. Exploring the command-line interface
-12. Parametrization
-13. Interactive console
+10. Exploring the command-line interface
+11. Exploratory data analysis
+12. Interactive console
+13. Parametrization
 14. Integration testing
-15. Debugging
-16. Logging
-17. Working with functions
+15. Logging
+16. Debugging
 
 [Documentation](https://ploomber.readthedocs.io/en/latest/get-started/index.html)
 
