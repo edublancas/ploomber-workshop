@@ -18,7 +18,7 @@ If you prefer to run things locally, scroll down to the *Running it locally* sec
 
 Familiarity with JupyterLab, and a basic knowledge of pandas.
 
-## Workshop schedule
+## Workshop content
 
 1. What is Ploomber?
 2. Describing a pipeline using a `pipeline.yaml` file
@@ -29,6 +29,25 @@ Familiarity with JupyterLab, and a basic knowledge of pandas.
 7. Pipeline visualization
 8. Coding the analysis
 9. Incremental builds
+
+10. Exploratory data analysis
+11. Exploring the command-line interface
+12. Parametrization
+13. Interactive console
+14. Integration testing
+15. Debugging
+16. Logging
+17. Working with functions
+
+[Documentation](https://ploomber.readthedocs.io/en/latest/get-started/index.html)
+
+## Format
+
+1. 45-minute session
+2. 10-minute break
+3. 45-minute session
+4. 10-minute break
+3. 30-minute session
 
 ## Running it locally
 
