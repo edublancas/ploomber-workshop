@@ -48,7 +48,7 @@ Familiarity with JupyterLab, and a basic knowledge of pandas.
 4. 10-minute break
 3. 30-minute session
 
-## Running it locally
+## Running it locally (with conda)
 
 You can also follow this workshop locally, but it requires a bit more setup:
 
@@ -68,6 +68,19 @@ invoke setup --from-lock
 
 # activate environment
 conda activate ploomber-workshop
+
+# start jupyter
+jupyter lab
+```
+
+Then open `index.ipynb`.
+
+## Running it locally (with pip)
+
+```sh
+# install dependencies
+pip install --upgrade pip
+pip install -r requirements.dev.txt
 
 # start jupyter
 jupyter lab
