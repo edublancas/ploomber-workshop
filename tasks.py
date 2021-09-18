@@ -7,12 +7,15 @@ import jupytext
 
 
 @task
-def setup(c):
+def setup(c, from_lock=False):
     """Create conda environment
     """
-    c.run('conda env create --file environment.dev.yml --force')
-    c.run('conda env export --no-build --file environment.yml'
-          ' --name scipy-2021')
+    if from_lock:
+        c.run('conda env create --file environment.yml --force')
+    else:
+        c.run('conda env create --file environment.dev.yml --force')
+        c.run('conda env export --no-build --file environment.yml'
+              ' --name ploomber-workshop')
 
 
 @task

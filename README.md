@@ -65,7 +65,7 @@ cd vancouver-datajam
 
 # install dependencies (requires conda)
 pip install invoke
-invoke setup
+invoke setup --from-lock
 
 # activate environment
 conda activate ploomber-workshop

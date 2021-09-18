@@ -13,3 +13,4 @@ dependencies:
     - scikit-learn
     - sklearn-evaluation
     - jupyterlab
+    - invoke
