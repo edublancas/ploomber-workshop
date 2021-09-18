@@ -1,6 +1,3 @@
-meta:
-  jupyter_hot_reload: True
-
 tasks:
   - source: scripts/get.py
     product:

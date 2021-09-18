@@ -12,5 +12,7 @@ dependencies:
     - pandas
     - scikit-learn
     - sklearn-evaluation
+    - seaborn
     - jupyterlab
     - invoke
+    - ipywidgets
