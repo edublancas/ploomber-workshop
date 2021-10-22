@@ -1,9 +1,15 @@
 from pathlib import Path
 import shutil
 
+from jinja2 import Template
 from invoke import task
-
 import jupytext
+
+
+def _render(from_, to_, **kwargs):
+    template = Template(Path(from_).read_text())
+    output = template.render(**kwargs)
+    Path(to_).write_text(output)
 
 
 @task
@@ -19,9 +25,12 @@ def setup(c, from_lock=False):
 
 
 @task
-def convert(c):
-    """Convert index.md to index.ipynb
+def convert(c, name):
+    """Generate README.md and index.md. Convert index.md to index.ipynb
     """
+    _render('_readme.md', 'README.md', name=name)
+    _render('_index.md', 'index.md', name=name)
+
     nb = jupytext.read('index.md')
     jupytext.write(nb, 'index.ipynb')
 

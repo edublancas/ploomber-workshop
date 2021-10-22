@@ -12,7 +12,7 @@ jupyter:
     name: python3
 ---
 
-# Global Hacks Ploomber Workshop Material
+# {{name}} Ploomber Workshop Material
 
 ## Introduction
 

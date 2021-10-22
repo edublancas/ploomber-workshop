@@ -1,4 +1,4 @@
-# Global Hacks - Ploomber Workshop Material
+# {{name}} - Ploomber Workshop Material
 
 Authors: [Eduardo Blancas](https://twitter.com/edublancas) and Ido Michael
 
