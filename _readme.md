@@ -6,7 +6,10 @@ This workshop demonstrates how to develop reproducible pipelines using [Ploomber
 
 To start, [click here](https://mybinder.org/v2/gh/edublancas/ploomber-workshop/main?urlpath=lab/tree/index.ipynb) or on the button below:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/edublancas/ploomber-workshop/main?urlpath=lab/tree/index.ipynb)
+<p align="center">
+  <a href="https://mybinder.org/v2/gh/edublancas/ploomber-workshop/main?urlpath=lab/tree/index.ipynb"> <img src="_static/open-jupyterlab.svg" alt="Open JupyerLab"> </a>
+</p>
+
 
 **Note:** It may take a few seconds for the notebook to load.
 
