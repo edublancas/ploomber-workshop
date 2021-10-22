@@ -29,23 +29,12 @@ Familiarity with JupyterLab, and a basic knowledge of pandas.
 7. Pipeline visualization
 8. Coding the analysis
 9. Incremental builds
-10. Exploring the command-line interface
-11. Exploratory data analysis
-12. Interactive console
-13. Parametrization
-14. Integration testing
-15. Logging
-16. Debugging
 
 [Documentation](https://ploomber.readthedocs.io/en/latest/get-started/index.html)
 
 ## Format
 
-1. 45-minute session
-2. 10-minute break
-3. 45-minute session
-4. 10-minute break
-3. 30-minute session
+1. 60-minute session
 
 ## Running it locally (with conda)
 
