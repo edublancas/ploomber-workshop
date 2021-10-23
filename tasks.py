@@ -5,7 +5,7 @@ from jinja2 import Template
 from invoke import task
 import jupytext
 
-_TARGET = Path('~', 'dev', 'ploomber', 'workshop.md').expanduser()
+_TARGET = Path('~', 'dev', 'ploomber').expanduser()
 
 
 def _render(from_, to_, **kwargs):
@@ -38,8 +38,15 @@ def convert(c, name):
     nb = jupytext.read('index.md')
     jupytext.write(nb, 'index.ipynb')
 
-    print(f'Copying README.md to {_TARGET}')
-    shutil.copy('README.md', _TARGET)
+    workshop_md = _TARGET / 'workshop.md'
+
+    img_source = '_static/workshop.svg'
+    img = _TARGET / '_static' / 'workshop.svg'
+
+    print(f'Copying README.md to {workshop_md}...')
+    shutil.copy('README.md', workshop_md)
+    print(f'Copying {img_source} to {img}...')
+    shutil.copy(img_source, img)
 
 
 @task
