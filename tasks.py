@@ -5,6 +5,8 @@ from jinja2 import Template
 from invoke import task
 import jupytext
 
+_TARGET = Path('~', 'dev', 'ploomber', 'workshop.md').expanduser()
+
 
 def _render(from_, to_, **kwargs):
     template = Template(Path(from_).read_text())
@@ -28,11 +30,16 @@ def setup(c, from_lock=False):
 def convert(c, name):
     """Generate README.md and index.md. Convert index.md to index.ipynb
     """
+    print('Generating README.md and index.md...')
     _render('_readme.md', 'README.md', name=name)
     _render('_index.md', 'index.md', name=name)
 
+    print('Generating index.ipynb...')
     nb = jupytext.read('index.md')
     jupytext.write(nb, 'index.ipynb')
+
+    print(f'Copying README.md to {_TARGET}')
+    shutil.copy('README.md', _TARGET)
 
 
 @task

@@ -1,6 +1,6 @@
 # Global Hacks - Ploomber Workshop Material
 
-Authors: [Eduardo Blancas](https://twitter.com/edublancas) and Ido Michael
+Authors: [Eduardo Blancas](https://twitter.com/edublancas) and [Ido Michael](https://www.linkedin.com/in/ido-michael/)
 
 This workshop demonstrates how to develop reproducible pipelines using [Ploomber](https://github.com/ploomber/ploomber).
 
