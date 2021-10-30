@@ -1,4 +1,4 @@
-# Vol Hacks - Ploomber Workshop Material
+# Hack TX - Ploomber Workshop Material
 
 Authors: [Eduardo Blancas](https://twitter.com/edublancas) and [Ido Michael](https://www.linkedin.com/in/ido-michael/)
 
