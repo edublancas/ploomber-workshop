@@ -1,4 +1,4 @@
-# {{name}} - Ploomber Workshop Material
+# Ploomber Workshop Material
 
 Authors: [Eduardo Blancas](https://twitter.com/edublancas) and [Ido Michael](https://www.linkedin.com/in/ido-michael/)
 

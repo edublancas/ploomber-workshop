@@ -12,7 +12,7 @@ jupyter:
     name: python3
 ---
 
-# Hack TX Ploomber Workshop Material
+# Ploomber Workshop Material
 
 ## Introduction
 
@@ -346,7 +346,6 @@ Here are a few resources to dig deeper:
 
 # Contact
 
+* Twitter: [@ploomber](https://twitter.com/ploomber)
+* Join us on Slack: [http://community.ploomber.io](http://community.ploomber.io)
 * E-mail: [contact@ploomber.io](mailto:contact@ploomber.io)
-* [Twitter](https://twitter.com/ploomber)
-* [Google form](https://forms.gle/Xf9h1Q2TGoSk15NEA)
-* [Join us on Slack](http://community.ploomber.io)
