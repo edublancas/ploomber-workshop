@@ -60,6 +60,7 @@ def clear(c):
 
     if playground.exists():
         shutil.rmtree('playground')
+        shutil.copy('_sample/nb.ipynb', 'playground/nb.ipynb')
 
     playground.mkdir()
     scripts = playground / 'scripts'
@@ -68,13 +69,5 @@ def clear(c):
     out.mkdir()
 
     (playground / '.gitkeep').touch()
-    (playground / 'pipeline.yaml').touch()
     (out / '.gitkeep').touch()
     (scripts / '.gitkeep').touch()
-
-    example_out = Path('example', 'output')
-
-    if example_out.exists():
-        shutil.rmtree(example_out)
-
-    example_out.mkdir(parents=True)
