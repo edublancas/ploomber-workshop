@@ -24,20 +24,29 @@ def setup(c, from_lock=False):
 def convert(c):
     """Generate README.md and index.md. Convert index.md to index.ipynb
     """
-    print('Generating README.md and index.md...')
     print('Generating index.ipynb...')
     nb = jupytext.read('index.md')
     jupytext.write(nb, 'index.ipynb')
 
-    workshop_md = _TARGET / 'workshop.md'
+    print('Generating index.es.ipynb...')
+    nb = jupytext.read('index.es.md')
+    jupytext.write(nb, 'index.es.ipynb')
 
-    img_source = '_static/workshop.svg'
-    img = _TARGET / '_static' / 'workshop.svg'
+    files_to_copy = [
+        ('_static/workshop.svg', None),
+        ('_static/workshop.es.svg', None),
+        ('README.md', 'workshop.md'),
+        ('README.es.md', 'workshop.es.md'),
+    ]
 
-    print(f'Copying README.md to {workshop_md}...')
-    shutil.copy('README.md', workshop_md)
-    print(f'Copying {img_source} to {img}...')
-    shutil.copy(img_source, img)
+    for f, target in files_to_copy:
+        if target is None:
+            target = _TARGET / f
+        else:
+            target = _TARGET / target
+
+        print(f'Copying {f} to {target}...')
+        shutil.copy(f, target)
 
 
 @task

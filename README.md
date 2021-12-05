@@ -33,10 +33,6 @@ Familiarity with JupyterLab, and a basic knowledge of pandas and scikit-learn.
 
 [Documentation](https://ploomber.readthedocs.io/en/latest/get-started/index.html)
 
-## Format
-
-1. 60-minute session
-
 ## Running it locally (with conda)
 
 You can also follow this workshop locally, but it requires a bit more setup:
