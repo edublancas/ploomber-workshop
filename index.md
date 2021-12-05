@@ -175,7 +175,7 @@ At the top of the notebook, you'll see the following:
 upstream = None
 ```
 
-This special variable indicates which tasks should execute before the notebook we're currently working on. In this case, we want to get the raw data so we can process it here, so we do:
+This special variable indicates which tasks should execute before the notebook we're currently working on. In this case, we want to get training data so we can train our new model so we change the `upstream` variable:
 
 ```python
 upstream = ['train-test-split']
@@ -236,14 +236,14 @@ You can see that only the `gradient-boosting-regressor` task ran!
 
 Incremental builds allow us to iterate faster without keeping track of task changes.
 
-Check out [`playground/output/gradient-boosting-regressor.ipynb`](playground/output/gradient-boosting-regressor.ipynb), which contains the output notebooks with the model evaluation plot and table.
+Check out [`playground/output/gradient-boosting-regressor.ipynb`](playground/output/gradient-boosting-regressor.ipynb), which contains the output notebooks with the model evaluation plot.
 
 
 ## 8. Execution in the cloud
 
 When working with datasets that fit in memory, running your pipeline is simple enough, but sometimes you may need more computing power for your analysis. Ploomber makes it simple to execute your code in a distributed environment without code changes.
 
-Check out [Soopervisor](soopervisor.readthedocs.io), the package that implements exporting Ploomber projects in the cloud with support for:
+Check out [Soopervisor](https://soopervisor.readthedocs.io), the package that implements exporting Ploomber projects in the cloud with support for:
 
 * [Kubernetes (Argo Workflows)](https://soopervisor.readthedocs.io/en/latest/tutorials/kubernetes.html)
 * [AWS Batch](https://soopervisor.readthedocs.io/en/latest/tutorials/aws-batch.html)
@@ -263,7 +263,7 @@ Here are a few resources to dig deeper:
 * [Argo Community Meeting talk](https://youtu.be/FnpXyg-5W_c)
 * [Pangeo Showcase talk (AWS Batch demo)](https://youtu.be/XCgX1AszVF4)
 
-# 10 .Contact
+# 10. Contact
 
 * Twitter: [@ploomber](https://twitter.com/ploomber)
 * Join us on Slack: [http://ploomber.io/community](http://ploomber.io/community)
