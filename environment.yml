@@ -20,7 +20,7 @@ dependencies:
   - gettext=0.19.8.1
   - giflib=5.2.1
   - graphite2=1.3.13
-  - graphviz=2.49.3
+  - graphviz=2.50.0
   - gtk2=2.24.33
   - gts=0.7.6
   - harfbuzz=3.1.2
@@ -50,12 +50,13 @@ dependencies:
   - pip=21.3.1
   - pixman=0.40.0
   - pygraphviz=1.7
-  - python=3.8.12
-  - python_abi=3.8
+  - python=3.9.7
+  - python_abi=3.9
   - readline=8.1
   - setuptools=59.4.0
   - sqlite=3.37.0
   - tk=8.6.11
+  - tzdata=2021e
   - wheel=0.37.0
   - xz=5.2.5
   - zlib=1.2.11
@@ -84,7 +85,6 @@ dependencies:
     - greenlet==1.1.2
     - humanize==3.13.1
     - idna==3.3
-    - importlib-resources==5.4.0
     - invoke==1.6.0
     - ipdb==0.13.9
     - ipykernel==6.6.0
@@ -154,7 +154,6 @@ dependencies:
     - send2trash==1.8.0
     - setuptools-scm==6.3.2
     - six==1.16.0
-    - sklearn-evaluation==0.5.7
     - sniffio==1.2.0
     - soorgeon==0.0.1
     - sqlalchemy==1.4.27
@@ -176,5 +175,4 @@ dependencies:
     - webencodings==0.5.1
     - websocket-client==1.2.1
     - widgetsnbextension==3.5.2
-    - zipp==3.6.0
 prefix: /Users/Edu/miniconda3/envs/ploomber-workshop
