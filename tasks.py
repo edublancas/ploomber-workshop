@@ -8,15 +8,6 @@ import jupytext
 _TARGET = Path('~', 'dev', 'ploomber').expanduser()
 
 
-def _render(from_, to_, **kwargs):
-    """Note: we're no longer passing any params, but we may add some 
-    in the future so leaving the jinja logic here
-    """
-    template = Template(Path(from_).read_text())
-    output = template.render(**kwargs)
-    Path(to_).write_text(output)
-
-
 @task
 def setup(c, from_lock=False):
     """Create conda environment
@@ -34,9 +25,6 @@ def convert(c):
     """Generate README.md and index.md. Convert index.md to index.ipynb
     """
     print('Generating README.md and index.md...')
-    _render('_readme.md', 'README.md')
-    _render('_index.md', 'index.md')
-
     print('Generating index.ipynb...')
     nb = jupytext.read('index.md')
     jupytext.write(nb, 'index.ipynb')

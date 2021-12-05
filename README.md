@@ -12,25 +12,24 @@ To start, [click here](https://mybinder.org/v2/gh/edublancas/ploomber-workshop/m
 
 **Note:** It may take a few seconds for the notebook to load.
 
-If you prefer to run things locally, scroll down to the *Running it locally* section.
+Scroll down to the *Running it locally* section if you prefer to run things locally.
 
 ## Workshop level: intermediate
 
 ## Background knowledge
 
-Familiarity with JupyterLab, and a basic knowledge of pandas.
+Familiarity with JupyterLab, and a basic knowledge of pandas and scikit-learn.
 
 ## Workshop content
 
-1. What is Ploomber?
-2. Describing a pipeline using a `pipeline.yaml` file
-3. Describing tasks
-4. Scripts as notebooks, and notebooks as outputs
-5. Scaffolding projects
-6. Adding task dependencies
-7. Pipeline visualization
-8. Coding the analysis
-9. Incremental builds
+1. Introduction
+2. Refactoring a legacy notebook
+3. The `pipeline.yaml` file.
+4. Building the pipeline
+5. Declaring dependencies
+6. Adding a new task
+7. Incremental builds
+8. Execution in the cloud
 
 [Documentation](https://ploomber.readthedocs.io/en/latest/get-started/index.html)
 

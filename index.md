@@ -27,7 +27,7 @@ Software engineers typically break down projects into multiple steps and test co
 **Ploomber provides all the necessary tools to build multi-stage, reproducible pipelines in Jupyter that feel like a single notebook.** Users can easily break down their analysis into multiple notebooks and execute them all with a single command.
 
 
-## 2. Refactoring a legacy pipeline
+## 2. Refactoring a legacy notebook
 
 If you already have a project in a single notebook, you can use our tool [Soorgeon](https://github.com/ploomber/soorgeon) to automatically refactor it into a [Ploomber](https://github.com/ploomber/ploomber) pipeline.
 
@@ -80,7 +80,7 @@ ploomber status
 ```
 
 <!-- #region -->
-## 3. The `pipeline.yaml` file.
+## 3. The `pipeline.yaml` file
 
 To develop a pipeline, users create a `pipeline.yaml` file and declare the tasks and their outputs as follows:
 
@@ -239,7 +239,7 @@ Incremental builds allow us to iterate faster without keeping track of task chan
 Check out [`playground/output/gradient-boosting-regressor.ipynb`](playground/output/gradient-boosting-regressor.ipynb), which contains the output notebooks with the model evaluation plot and table.
 
 
-## 8. Epilogue: Execution in the cloud
+## 8. Execution in the cloud
 
 When working with datasets that fit in memory, running your pipeline is simple enough, but sometimes you may need more computing power for your analysis. Ploomber makes it simple to execute your code in a distributed environment without code changes.
 
