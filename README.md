@@ -1,3 +1,7 @@
+## Show your support with a star ⭐️ on this repository!
+
+---
+
 # Ploomber Workshop Material
 
 Authors: [Eduardo Blancas](https://twitter.com/edublancas) and [Ido Michael](https://www.linkedin.com/in/ido-michael/)
