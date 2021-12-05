@@ -266,5 +266,5 @@ Here are a few resources to dig deeper:
 # 10 .Contact
 
 * Twitter: [@ploomber](https://twitter.com/ploomber)
-* Join us on Slack: [http://community.ploomber.io](http://community.ploomber.io)
+* Join us on Slack: [http://ploomber.io/community](http://ploomber.io/community)
 * E-mail: [contact@ploomber.io](mailto:contact@ploomber.io)

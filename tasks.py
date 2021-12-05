@@ -63,12 +63,3 @@ def clear(c):
 
     playground.mkdir(exist_ok=True)
     shutil.copy('_sample/nb.ipynb', 'playground/nb.ipynb')
-
-    scripts = playground / 'scripts'
-    scripts.mkdir()
-    out = playground / 'output'
-    out.mkdir()
-
-    (playground / '.gitkeep').touch()
-    (out / '.gitkeep').touch()
-    (scripts / '.gitkeep').touch()
