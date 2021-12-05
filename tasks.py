@@ -60,9 +60,10 @@ def clear(c):
 
     if playground.exists():
         shutil.rmtree('playground')
-        shutil.copy('_sample/nb.ipynb', 'playground/nb.ipynb')
 
-    playground.mkdir()
+    playground.mkdir(exist_ok=True)
+    shutil.copy('_sample/nb.ipynb', 'playground/nb.ipynb')
+
     scripts = playground / 'scripts'
     scripts.mkdir()
     out = playground / 'output'

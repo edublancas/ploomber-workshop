@@ -4,6 +4,7 @@ playground/output
 playground/pipeline.png
 playground/tasks
 playground/exported.py
+playground/nb.ipynb
 example/output/
 
 # Byte-compiled / optimized / DLL files
