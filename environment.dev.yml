@@ -9,6 +9,7 @@ dependencies:
   - pip
   - pip:
     - ploomber
+    - soorgeon
     - pandas
     - scikit-learn
     - sklearn-evaluation

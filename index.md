@@ -5,16 +5,16 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.13.3
   kernelspec:
-    display_name: Python 3
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
 
 # Ploomber Workshop Material
 
-## Introduction
+## 1. Introduction
 
 Notebooks are an excellent environment for data exploration: they allow us to write code interactively and get visual feedback, providing an unbeatable experience for understanding our data.
 
@@ -27,44 +27,60 @@ Software engineers typically break down projects into multiple steps and test co
 **Ploomber provides all the necessary tools to build multi-stage, reproducible pipelines in Jupyter that feel like a single notebook.** Users can easily break down their analysis into multiple notebooks and execute them all with a single command.
 
 
-## Running a pipeline
+## 2. Refactoring a legacy pipeline
 
-Pipelines are composed of multiple files; the `example/` directory contains a complete example:
+If you already have a project in a single notebook, you can use our tool [Soorgeon](https://github.com/ploomber/soorgeon) to automatically refactor it into a [Ploomber](https://github.com/ploomber/ploomber) pipeline.
 
-```sh
-ls example
-```
-
-We can see the following:
-
-* `output/` - directory to save our output (won't exist until after the first run)
-* `pipeline.yaml` - pipeline declaration
-* `scripts/` - our source code
-
-Note that even though we have `.py` files, we'll open them as notebooks. The following section explains why and how.
-
-Let's look at the scripts:
+Let's use the sample notebook in the `playground/` directory:
 
 ```sh
-ls example/scripts
+ls playground
 ```
 
-There are four of them; each file corresponds to a single task in our pipeline.
+Our sample notebook is the [`nb.ipynb`](playground/nb.ipynb) file, let's take a look at it.
 
-Let's run the pipeline:
-
-**Note:** This takes about 10 seconds to run; you won't see any output until it's done.
+To refactor the notebook, we use the `soorgeon refactor` command:
 
 ```sh
-cd example
-ploomber build
+cd playground
+soorgeon refactor nb.ipynb
 ```
 
-### That's it! You just ran your first Ploomber pipeline!
+Let's take a look at the directory:
 
-Let's now see how the different pieces come together by re-creating the example pipeline from scratch.
+```sh
+ls playground
+```
 
-## Creating a pipeline in Ploomber
+We can see that we have a few new files. `pipeline.yaml` contains the pipeline declaration, and `tasks/` contains the *stages* that Soorgeon identified based on our H2 Markdown headings.
+
+```sh
+ls playground/tasks
+```
+
+Let's plot the pipeline (note that we're now using `ploomber`, which is the framework for developing pipelines:
+
+```sh
+cd playground
+ploomber plot
+```
+
+```python
+from IPython.display import Image
+Image('playground/pipeline.png')
+```
+
+Soorgeon correctly identified the *stages* in our original `nb.ipynb` notebook. It even detected that the last two tasks (`linear-regression`, and `random-forest-regressor` are independenf of each other!).
+
+We can also get a summary of the pipeline with `ploomber status`:
+
+```sh
+cd playground
+ploomber status
+```
+
+<!-- #region -->
+## 3. The `pipeline.yaml` file.
 
 To develop a pipeline, users create a `pipeline.yaml` file and declare the tasks and their outputs as follows:
 
@@ -78,207 +94,16 @@ tasks:
   # more tasks here...
 ```
 
-The previous pipeline has a single task (`script.py`) and generates two outputs: `output/executed.ipynb` and `output/data.csv`. You may be wondering why we have a notebook as an output: Ploomber converts scripts to notebooks before execution; hence, our script is considered the source and the notebook a byproduct of the execution. The use of scripts as sources (instead of notebooks) makes it simpler to use git. However, this does not mean you have to give up interactive development since Ploomber integrates with Jupyter, allowing you to edit scripts as notebooks.
+The previous pipeline has a single task (`script.py`) and generates two outputs: `output/executed.ipynb` and `output/data.csv`. You may be wondering why we have a notebook as an output: Ploomber converts scripts to notebooks before execution; hence, our script is considered the source and the notebook a byproduct of the execution. Using scripts as sources (instead of notebooks) makes it simpler to use git. However, this does not mean you have to give up interactive development since Ploomber integrates with Jupyter, allowing you to edit scripts as notebooks.
 
-**Let's now build a simple four-step pipeline**:
 
-```yaml
-# copy this YAML into playground/pipeline.yaml
-tasks:
-  - source: scripts/get.py
-    product:
-      nb: output/get.ipynb
-      data: output/get.csv
+In this case, since we used `soorgeon` to refactor an existing notebook, we didn't have to write the `pipeline.yaml` file, let's take a look at the auto-generated one: [`playground/pipeline.yaml`](playground/pipeline.yaml).
 
-  - source: scripts/feature-sepal.py
-    product:
-      nb: output/feature-sepal.ipynb
-      data: output/feature-sepal.csv
-
-  - source: scripts/feature-petal.py
-    product:
-      nb: output/feature-petal.ipynb
-      data: output/feature-petal.csv
-
-  - source: scripts/fit.py
-    product:
-      nb: output/fit.ipynb
-      model: output/model.pickle
-```
-
-The pipeline above has four tasks: one that obtains raw data (the iris dataset), two that process such data, and a final task that trains a model.
-
-#### Step 1: Copy the snippet contents above into `playground/pipeline.yaml` (Create the file first, save before running the next cell).
-
-Our source code is still missing; let's ask Ploomber to generate some base files for us:
-
-```sh
-cd playground
-ploomber scaffold
-```
-
-Let's now ensure that our pipeline is appropriately recognized:
-
-```sh
-cd playground
-ploomber status
-```
-
-We can see that Ploomber recognizes our pipeline and prints its status. Let's visualize it:
-
-```sh
-cd playground
-ploomber plot
-```
-
-```python
-from IPython.display import Image
-Image('playground/pipeline.png')
-```
-
-<!-- #region -->
-
-**Our pipeline doesn't have any structure yet, but we can easily add it.**
-
-We want to:
-
-1. Get data
-2. Process it
-3. Fit a model
-
-Let's edit those files.
-
-#### Step 2: Open `playground/scripts/features-petal.py` as a notebook by right-clicking on it and then `Open With` -> `Notebook`:
-
-![lab-open-with-notebook](images/lab-open-with-notebook.png)
-
-At the top of the notebook, you'll see the following:
-
-```python
-upstream = None
-```
-
-This special variable indicates which tasks should execute before the notebook we're currently working on. In this case, we want to get the raw data so we can process it here, so we do:
-
-```python
-upstream = ['get']
-```
-
-#### Step 3: In `playground/scripts/features-petal.py`, replace `upstream = None` with `upstream = ['get']`
-
-So far, we've told ploomber that it should run `get.py` before `features-petal.py`. But we cannot execute this interactively, since we don't know where `get.py` is saving its output, but we can quickly fix that.
-
-#### Step 4: In `playground/scripts/features-petal.py`, save the file, then click on `File` -> `Reload Python File from Disk`:
-
-![reload-file](images/reload-file.png)
-
-You'll see that the script updates. Since you said you want to execute `get` first, Ploomber adds a new cell that contains the output files of `get`.
-
-**Ploomber makes it simple to assemble a data pipeline from multiple notebooks!**
-
-Let's continue declaring the remaining dependencies for the other tasks:
-
-**Note:** Remember to open the following two scripts as notebooks (right-clicking and then `Open With` -> `Notebook`)
-
-#### Step 5: Edit `playground/scripts/features-sepal.py`, change `upstream = None` to `upstream = ['get']`, and save
-#### Step 6: Edit `playground/scripts/fit.py`, change `upstream = None` to `upstream = ['get', 'feature-sepal', 'feature-petal']`, and save
-
-Let's now re-create the pipeline plot:
 <!-- #endregion -->
 
-```sh
-cd playground
-ploomber plot
-```
+## 4. Building the pipeline
 
-```python
-from IPython.display import Image
-Image('playground/pipeline.png')
-```
-
-<!-- #region -->
-
-Ploomber recognizes the references and draws the dependency relationship among tasks.
-
-You should see something like this:
-
-![pipeline-diagram](images/pipeline-diagram.png)
-
-Our pipeline doesn't do anything yet. So let's add some code. Edit the files and add the following:
-
-**Note:** make sure you add the code in a new cell **at the end** of the notebook.
-
-#### Step 7: Paste the following code in  `playground/scripts/get.py`
-
-```python
-# get raw data
-import pandas as pd
-from sklearn.datasets import load_iris
-
-raw = load_iris(as_frame=True)
-df = raw['data']
-df.head()
-df['target'] = raw['target']
-df.to_csv(product['data'], index=False)
-```
-
-#### Step 8: Paste the following code in `playground/scripts/feature-sepal.py`
-
-```python
-# generate one feature
-import pandas as pd
-
-df = pd.read_csv(upstream['get']['data'])
-df['sepal-area'] = df['sepal length (cm)'] * df['sepal width (cm)']
-df[['sepal-area']].to_csv(product['data'], index=False)
-```
-
-#### Step 9: Paste the following code in `playground/scripts/feature-petal.py`
-
-```python
-# generate another feature
-import pandas as pd
-
-df = pd.read_csv(upstream['get']['data'])
-df['petal-area'] = df['petal length (cm)'] * df['petal width (cm)']
-df[['petal-area']].to_csv(product['data'], index=False)
-```
-
-#### Step 10: Paste the following code in `playground/scripts/fit.py`
-
-```python
-# train a model and save it
-from pathlib import Path
-import pickle
-
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn_evaluation import plot
-
-get = pd.read_csv(upstream['get']['data'])
-petal = pd.read_csv(upstream['feature-sepal']['data'])
-sepal = pd.read_csv(upstream['feature-petal']['data'])
-df = get.join(petal).join(sepal)
-
-X = df.drop('target', axis='columns')
-y = df['target']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-
-model = DecisionTreeClassifier()
-model.fit(X_train, y_train)
-Path(product['model']).write_bytes(pickle.dumps(model))
-
-y_pred = model.predict(X_test)
-
-plot.confusion_matrix(y_test, y_pred)
-```
-
-We can now run our pipeline:
-
-**Note:** This takes about 10 seconds to run; you won't see any output until it's done.
-<!-- #endregion -->
+Let's build the pipeline (this will take ~30 seconds):
 
 ```sh
 cd playground
@@ -291,36 +116,130 @@ Navigate to `playground/output/` and you'll see all the outputs: the executed no
 ls playground/output
 ```
 
-<!-- #region -->
+## 5. Declaring dependencies
 
-## Incremental builds
+Let's look again at our pipeline plot:
+
+```python
+Image('playground/pipeline.png')
+```
+
+<!-- #region -->
+The arrows in the diagram represent input/output dependencies, hence, determine execution order. For example, the first task (`load`) loads some data, then `clean` uses such data as input and process it, then `train-test-split` splits our dataset in training and test, finally, we use those datasets to train a linear regression and a random forest regressor.
+
+Soorgeon extracted and declared this dependencies for us, but if we want to modify the existing pipeline, we need to declare such dependencies. Let's see how.
+
+
+## 6. Adding a new task
+
+Let's say we want to train another model and decide to try [Gradient Boosting Regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor). First, we modify the `pipeline.yaml` file and add a new task:
+
+####  Open `playground/pipeline.yaml` and add the following lines at the end
+
+```yaml
+- source: tasks/gradient-boosting-regressor.py
+  product:
+    nb: output/gradient-boosting-regressor.ipynb
+```
+
+Now, let's create a base file by executing `ploomber scaffold`:
+<!-- #endregion -->
+
+```sh
+cd playground
+ploomber scaffold
+```
+
+Let's see how the plot looks now:
+
+```sh
+cd playground
+ploomber plot
+```
+
+```python
+from IPython.display import Image
+Image('playground/pipeline.png')
+```
+
+You can see that Ploomber recognizes the new file, but it doesn't have any dependency, so let's tell Ploomber that it should execute after `train-test-split`:
+
+<!-- #region -->
+####  Open `playground/tasks/gradient-boosting-regressor.py` as a notebook by right-clicking on it and then `Open With` -> `Notebook`:
+
+![lab-open-with-notebook](images/lab-open-with-notebook.png)
+
+At the top of the notebook, you'll see the following:
+
+```python
+upstream = None
+```
+
+This special variable indicates which tasks should execute before the notebook we're currently working on. In this case, we want to get the raw data so we can process it here, so we do:
+
+```python
+upstream = ['train-test-split']
+```
+
+Let's generate the plot again:
+<!-- #endregion -->
+
+```sh
+cd playground
+ploomber plot
+```
+
+```python
+from IPython.display import Image
+Image('playground/pipeline.png')
+```
+
+<!-- #region -->
+Ploomber now recognizes our dependency declaration!
+
+####  Open `playground/tasks/gradient-boosting-regressor.py` as a notebook by right-clicking on it and then `Open With` -> `Notebook` and add the following code:
+
+```python
+from pathlib import Path
+import pickle
+
+import seaborn as sns
+from sklearn.ensemble import GradientBoostingRegressor
+
+y_train = pickle.loads(Path(upstream['train-test-split']['y_train']).read_bytes())
+y_test = pickle.loads(Path(upstream['train-test-split']['y_test']).read_bytes())
+X_test = pickle.loads(Path(upstream['train-test-split']['X_test']).read_bytes())
+X_train = pickle.loads(Path(upstream['train-test-split']['X_train']).read_bytes())
+
+gbr = GradientBoostingRegressor()
+gbr.fit(X_train, y_train)
+
+y_pred = gbr.predict(X_test)
+sns.scatterplot(x=y_test, y=y_pred)
+```
+
+<!-- #endregion -->
+
+
+## 7. Incremental builds
 
 Data workflows require a lot of iteration. For example, you may want to generate a new feature or model. However, it's wasteful to re-execute every task with every minor change. Therefore, one of Ploomber's core features is incremental builds, which automatically skip tasks whose source code hasn't changed.
 
-#### Step 11: Modify `playground/scripts/fit.py`, by adding a summary table as a new cell at the end:
-
-```python
-# add this at the bottom of playground/scripts/fit.py
-from sklearn.metrics import classification_report
-print(classification_report(y_test, y_pred))
-```
-
 Run the pipeline again:
-<!-- #endregion -->
 
 ```sh
 cd playground
 ploomber build
 ```
 
-You can see that only the `fit` task ran!
+You can see that only the `gradient-boosting-regressor` task ran!
 
-Incremental builds allow us to iterate faster without having to keep track of task changes.
+Incremental builds allow us to iterate faster without keeping track of task changes.
 
-Check out `playground/output/fit.ipynb`, which contains the output notebooks with the model evaluation plot and table.
+Check out [`playground/output/gradient-boosting-regressor.ipynb`](playground/output/gradient-boosting-regressor.ipynb), which contains the output notebooks with the model evaluation plot and table.
 
 
-## Execution in the cloud
+## 8. Epilogue: Execution in the cloud
 
 When working with datasets that fit in memory, running your pipeline is simple enough, but sometimes you may need more computing power for your analysis. Ploomber makes it simple to execute your code in a distributed environment without code changes.
 
@@ -331,7 +250,7 @@ Check out [Soopervisor](soopervisor.readthedocs.io), the package that implements
 * [Airflow](https://soopervisor.readthedocs.io/en/latest/tutorials/airflow.html)
 
 
-# Resources
+# 9. Resources
 
 Thanks for taking the time to go through this tutorial! We hope you consider using Ploomber for your next project. If you have any questions or need help, please reach out to us! (contact info below).
 
@@ -344,7 +263,7 @@ Here are a few resources to dig deeper:
 * [Argo Community Meeting talk](https://youtu.be/FnpXyg-5W_c)
 * [Pangeo Showcase talk (AWS Batch demo)](https://youtu.be/XCgX1AszVF4)
 
-# Contact
+# 10 .Contact
 
 * Twitter: [@ploomber](https://twitter.com/ploomber)
 * Join us on Slack: [http://community.ploomber.io](http://community.ploomber.io)
